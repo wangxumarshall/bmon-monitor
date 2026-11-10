@@ -1,0 +1,30 @@
+[server]
+node_id = "0102"
+
+[bmc]
+verify_tls = false
+
+[machines]
+file = "machines.txt"    # BMC 凭据清单(ip 账号 密码 [别名]),不进仓库
+
+[storage]
+db_path = "data/bmon.db"
+raw_keep_s = 172800      # raw 保留 48h
+rollup_keep_s = 3024000  # 聚合保留 35d
+
+[collect]
+nodes = ["0102"]          # 要采集的机器别名(含本机 node_id)
+interval_core_s = 10      # 每核占用入库节奏
+interval_slow_s = 60       # SEL / SDC 日志
+interval_rollup_s = 300    # 1m 聚合
+interval_prune_s = 3600    # 清理
+
+[serve]
+host = "0.0.0.0"
+port = 8102
+
+[sdc]
+log_path = "/home/wangxu/sdc-stressng/sdc_stress_summary.log"
+
+[os]
+disk_path = "/"

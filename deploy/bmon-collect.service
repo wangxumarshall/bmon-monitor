@@ -1,0 +1,19 @@
+[Unit]
+Description=bmon BMC/OS monitor collector for 0102
+After=network-online.target
+
+[Service]
+Type=simple
+User=sdc
+WorkingDirectory=/home/sdc/wangxu/monitor
+# SELinux(enforcing): init_t cannot execute/follow the user_home_t venv paths
+# in ExecStart, and SELinuxContext= is only applied after systemd resolves the
+# ExecStart binary. /usr/bin/env (bin_t) is resolvable; it then execs the venv
+# python from the unconfined_t process, like a manual shell run.
+ExecStart=/usr/bin/env /home/sdc/wangxu/monitor/.venv/bin/python3 /home/sdc/wangxu/monitor/.venv/bin/bmon-collect --config /home/sdc/wangxu/monitor/config.toml
+Restart=always
+RestartSec=3
+SELinuxContext=unconfined_u:unconfined_r:unconfined_t:s0
+
+[Install]
+WantedBy=multi-user.target

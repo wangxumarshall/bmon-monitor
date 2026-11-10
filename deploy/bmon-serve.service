@@ -1,0 +1,16 @@
+[Unit]
+Description=bmon HTTP API + web dashboard for 0102
+After=network-online.target bmon-collect.service
+
+[Service]
+Type=simple
+User=sdc
+WorkingDirectory=/home/sdc/wangxu/monitor
+# See bmon-collect.service for why the venv python is exec'd via /usr/bin/env.
+ExecStart=/usr/bin/env /home/sdc/wangxu/monitor/.venv/bin/python3 /home/sdc/wangxu/monitor/.venv/bin/bmon-serve --config /home/sdc/wangxu/monitor/config.toml
+Restart=always
+RestartSec=3
+SELinuxContext=unconfined_u:unconfined_r:unconfined_t:s0
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,7 @@
+# bmon BMC 机器清单示例
+# 实际清单保存为 machines.txt(已被 .gitignore 忽略,凭据不会进仓库)。
+# 格式: 每行一台机器,空格分隔,第 4 列别名可省略(缺省用 ip):
+#   ip 账号 密码 [别名]
+# 以 # 开头的行为注释,空行忽略;文件权限需 0600(save_machines 会自动设置)。
+# 示例(去掉行首 # 并替换为真实信息):
+#9.3.12.13 Administrator YourPasswordHere 0102

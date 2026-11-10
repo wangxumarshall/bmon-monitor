@@ -1,0 +1,33 @@
+[project]
+name = "bmon"
+version = "0.1.0"
+description = "0102 server BMC monitor: collect, store, TUI, serve"
+requires-python = ">=3.11"
+dependencies = [
+  "requests>=2.28",
+  "fastapi>=0.110",
+  "uvicorn>=0.29",
+  "textual>=0.50",
+  "plotext>=5.0,<6",
+  "textual-plotext>=1.0",
+  "httpx>=0.27",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "pytest-asyncio>=0.23"]
+
+[project.scripts]
+bmon-collect = "bmon.collect:main"
+bmon-serve = "bmon.serve:main"
+bmon = "bmon.cli:main"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["bmon", "bmon.tui"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
